@@ -1,0 +1,123 @@
+<form [formGroup]="formularioDeUsuario" (ngSubmit)="enviarDados()">
+
+  <div>
+    <label for="cpf">CPF Emissor: </label>
+    <input type="text" formControlName="cpfEmissor">
+    <div *ngIf="!cpfEmissor.pristine && cpfEmissor.errors">
+      <p *ngIf="cpfEmissor.errors.required">
+        CPF é obrigatório.
+      </p>
+      <p *ngIf="cpfEmissor.errors.cpfInvalido">
+        Digite um CPF válido
+      </p>
+    </div>
+  </div>
+  
+  <div>
+    <label for="nome_emissor">Nome Emissor: </label>
+    <input type="text" formControlName="nome_emissor">
+    <div *ngIf="!nome_emissor.pristine && nome_emissor.errors">
+      <p *ngIf="nome_emissor.errors.required">
+        Nome é obrigatório.
+      </p>
+      <p *ngIf="nome_emissor.errors.minlength">
+        Nome deve ter no mínimo 3 caracters.
+      </p>
+      <p *ngIf="nome_emissor.errors.maxlength">
+        Nome deve ter no máximo 100 caracters.
+      </p>
+    </div> 
+  </div>
+
+  <div>
+    <label for="nome_receptor">Nome Receptor: </label>
+    <input type="text" formControlName="nome_receptor">
+    <div *ngIf="!nome_receptor.pristine && nome_receptor.errors">
+      <p *ngIf="nome_receptor.errors.required">
+        Nome é obrigatório.
+      </p>
+      <p *ngIf="nome_receptor.errors.minlength">
+        Nome deve ter no mínimo 3 caracters.
+      </p>
+      <p *ngIf="nome_receptor.errors.maxlength">
+        Nome deve ter no máximo 100 caracters.
+      </p>
+    </div> 
+  </div>
+
+  <div>
+    <label for="conta_emissor">Conta Emissor: </label>
+    <input type="text" formControlName="conta_emissor">
+    <div *ngIf="!conta_emissor.pristine && conta_emissor.errors">
+      <p *ngIf="conta_emissor.errors.required">
+        Número da conta obrigatório.
+      </p>
+      <p *ngIf="conta_emissor.errors">
+        Conta Inválida
+      </p>
+    </div> 
+  </div>
+  
+  <div>
+    <label for="conta_receptor">Conta Receptor: </label>
+    <input type="text" formControlName="conta_receptor">
+    <div *ngIf="!conta_receptor.pristine && conta_receptor.errors">
+      <p *ngIf="conta_receptor.errors.required">
+        Número da conta obrigatório.
+      </p>
+      <p *ngIf="conta_receptor.errors">
+        Conta Inválida
+      </p>
+    </div> 
+  </div>
+  <div>
+    <label for="cpf">CPF Receptor: </label>
+    <input type="text" formControlName="cpf_receptor">
+    <div *ngIf="!cpf_receptor.pristine && cpf_receptor.errors">
+      <p *ngIf="cpf_receptor.errors.required">
+        CPF é obrigatório.
+      </p>
+      <p *ngIf="cpf_receptor.errors.cpfInvalido">
+        Digite um CPF válido
+      </p>
+    </div>
+  </div>
+
+  <div>
+    <label for="saldo">Saldo Emissor: </label>
+    <input type="text" disabled formControlName="saldo_emissor">
+  </div> 
+
+  <div>
+    <label for="saldo">Saldo Receptor: </label>
+    <input type="text" disabled formControlName="saldo_receptor">
+  </div> 
+
+  <div>
+    <label for="valor_transferencia">Valor Transferencia: </label>
+    <input type="string" formControlName="valor_transferencia" 
+    currencyMask [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }"
+    >
+  </div> 
+
+  <div>
+    <label for="tipo">Tipo Transferência: </label>
+    <select name="tipo_transferência" formControlName="tipo_transferencia">
+      <option value="Pix">Pix</option>
+      <option value="TED">TED</option>
+      <option value="DOC">DOC</option>
+    </select>
+  </div> 
+
+  
+  
+  <div> 
+    <button [disabled]="!formularioDeUsuario.valid">Enviar dados</button>
+  </div>
+
+  <br>
+  <br>
+
+  <div>{{ formularioDeUsuario.value | json}}</div>
+  <div>{{ formularioDeUsuario.valid | json }}</div>
+</form>
